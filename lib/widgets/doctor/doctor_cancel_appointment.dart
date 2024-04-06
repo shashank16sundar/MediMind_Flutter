@@ -55,7 +55,7 @@ class _DoctorCancelAppointmentState extends State<DoctorCancelAppointment> {
             ),
             const SizedBox(height: 20),
             const CircleAvatar(
-              radius: 80,
+              radius: 50,
               backgroundImage: AssetImage('assets/logos/doctor_avatar.png'),
             ),
             const SizedBox(height: 20),

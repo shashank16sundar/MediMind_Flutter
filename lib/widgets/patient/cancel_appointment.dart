@@ -18,7 +18,7 @@ class CancelAppointment extends StatelessWidget {
   Widget build(BuildContext context) {
     // Placeholder for doctor's summary
     String doctorSummary =
-        "A psychiatrist is a medical doctor specializing in mental health, diagnosing, and treating mental illnesses through therapy, medication, and other interventions, aiming to improve patients' mental well-being and overall quality of life.";
+        "A psychiatrist is a medical doctor specializing in mental health, diagnosing, and treating mental illnesses.";
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +40,7 @@ class CancelAppointment extends StatelessWidget {
             ),
           ),
         ],
-      ), // Set background color to black
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -56,7 +56,7 @@ class CancelAppointment extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const CircleAvatar(
-              radius: 80,
+              radius: 50,
               backgroundImage: AssetImage('assets/logos/doctor_avatar.png'),
             ),
             const SizedBox(height: 20),

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medimind_app/screens/doctor/doctor_profile/edit_doctor_profile_screen.dart';
-import 'package:medimind_app/screens/profile/edit_profile_screen.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
 import 'package:medimind_app/widgets/auth/auth_icon_button.dart';
 import 'package:provider/provider.dart';

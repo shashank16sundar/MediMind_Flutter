@@ -7,10 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medimind_app/screens/auth/login_screen.dart';
 import 'package:medimind_app/screens/doctor_or_patient/interface_choice.dart';
-import 'package:medimind_app/screens/patient/patient_home_screen.dart';
-import 'package:medimind_app/screens/home_screen.dart';
 import 'package:medimind_app/utils/snack_bar.dart';
-import 'package:medimind_app/widgets/auth/otp_dialog_box.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;

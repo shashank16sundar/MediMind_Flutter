@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:medimind_app/services/api_service.dart';
 import 'package:http/http.dart' as http;
+import 'package:medimind_app/services/firebase_auth_methods.dart';
+import 'package:provider/provider.dart';
 
 class PastAppointmentHomeScreen extends StatefulWidget {
   final int appointmentID;
@@ -19,10 +22,38 @@ class PastAppointmentHomeScreen extends StatefulWidget {
 
 class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
   String summary = '';
+  String doctorNote = '';
   File? report;
   File? prescriptionImage;
   File? xRayScanImage;
+  bool isNoteSubmitted = false;
   static const String baseUrl = 'https://763f-1-6-74-117.ngrok-free.app';
+
+  void submitDoctorNote() {
+    // You can implement the functionality to submit the note here
+    print('Doctor note submitted: $doctorNote');
+    setState(() {
+      // Update the state to reflect the submitted note and set flag to true
+      doctorNote = doctorNote;
+      isNoteSubmitted = true;
+    });
+  }
+
+  Widget buildDoctorNote() {
+    return Visibility(
+      visible: doctorNote.isNotEmpty, // Only visible when note is submitted
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 10),
+          Text(
+            'Doctor Note: $doctorNote',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
 
   Future<void> _pickReport() async {
     FilePickerResult? result = await FilePicker.platform
@@ -57,31 +88,26 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
     }
   }
 
-  void _sendSummarizeRequest() async {
+  void _sendSummarizeRequest(User user) async {
     try {
       var response = await http.get(
-        Uri.parse(
-            '$baseUrl/api/summarize/2/${widget.appointmentID}'), // Replace with your API endpoint
+        Uri.parse('$baseUrl/api/summarize/2/${widget.appointmentID}'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
 
-      // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
-        // Decode the response JSON
         var jsonResponse = json.decode(response.body);
         setState(() {
           summary = jsonResponse['summary']['message'];
         });
       } else {
-        // Request failed, show an error message
         setState(() {
           summary = 'Failed to get summary';
         });
       }
     } catch (e) {
-      // Exception occurred, show an error message
       setState(() {
         summary = 'Error: $e';
       });
@@ -90,6 +116,8 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<FirebaseAuthMethods>().user;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Upload Medical Documents'),
@@ -167,12 +195,47 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
               ElevatedButton(
                 onPressed: () {
                   // APIService.sendSummarizeRequestToFlask(widget.appointmentID);
-                  _sendSummarizeRequest();
+                  _sendSummarizeRequest(user);
                 },
-                child: Text("Summarize"),
+                child: const Text("Summarize"),
               ),
               const SizedBox(height: 20),
               Text(summary),
+              TextField(
+                onChanged: (value) {
+                  setState(() {
+                    doctorNote = value;
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Add Note',
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: null, // Allow multiple lines
+                // Hide text field when note is submitted
+                enabled: !isNoteSubmitted,
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  submitDoctorNote(); // Call function to submit note
+                },
+                child: const Text('Add Note'),
+              ),
+              // Display the submitted doctor note only when the button is clicked
+              Visibility(
+                visible: isNoteSubmitted,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(height: 10),
+                    Text(
+                      'Doctor Note: $doctorNote',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

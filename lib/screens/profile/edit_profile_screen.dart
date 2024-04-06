@@ -49,12 +49,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
-  // final TextEditingController weightController = TextEditingController();
-  // final TextEditingController addressController = TextEditingController();
-  // final TextEditingController aadhaarController = TextEditingController();
-  // final TextEditingController phoneController = TextEditingController();
-  // final TextEditingController bloodController = TextEditingController();
-  // final TextEditingController genderController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController aadhaarController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController bloodController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -78,12 +78,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         nameController.text = userData['name'] ?? '';
         ageController.text = userData['age'] ?? '';
         heightController.text = userData['height'] ?? '';
+        weightController.text = userData['weight'] ?? '';
+        addressController.text = userData['address'] ?? '';
+        aadhaarController.text = userData['aadhaar_id'] ?? '';
+        genderController.text = userData['gender'] ?? '';
+        bloodController.text = userData['blood_type'] ?? '';
+        phoneController.text = userData['phone'] ?? '';
 
         return Scaffold(
           body: Center(
             child: SingleChildScrollView(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
                 child: Column(
                   children: [
                     const Text(
@@ -109,6 +116,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       hintText: 'Enter your height',
                     ),
                     const SizedBox(height: 30),
+                    AuthTextField(
+                      controller: weightController,
+                      hintText: 'Enter your weight',
+                    ),
+                    const SizedBox(height: 30),
+                    AuthTextField(
+                      controller: aadhaarController,
+                      hintText: 'Enter your aadhaar',
+                    ),
+                    const SizedBox(height: 30),
+                    AuthTextField(
+                      controller: addressController,
+                      hintText: 'Enter your address',
+                    ),
+                    const SizedBox(height: 30),
+                    AuthTextField(
+                      controller: bloodController,
+                      hintText: 'Enter your blood type',
+                    ),
+                    const SizedBox(height: 30),
+                    AuthTextField(
+                      controller: genderController,
+                      hintText: 'Enter your gender',
+                    ),
+                    const SizedBox(height: 30),
+                    AuthTextField(
+                      controller: phoneController,
+                      hintText: 'Enter your phone',
+                    ),
+                    const SizedBox(height: 30),
                     AuthIconButton(
                       labelText: 'Save',
                       isSvg: false,
@@ -117,13 +154,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         final userID = user.uid;
 
                         final name = nameController.text;
-                        final email = ageController.text;
-                        final about = heightController.text;
+                        final age = ageController.text;
+                        final height = heightController.text;
+                        final weight = weightController.text;
+                        final aadhaar = aadhaarController.text;
+                        final address = addressController.text;
+                        final bloodType = bloodController.text;
+                        final gender = genderController.text;
+                        final phone = phoneController.text;
 
                         final userData = {
                           'name': name,
-                          'age': email,
-                          'height': about,
+                          'age': age,
+                          'height': height,
+                          'weight': weight,
+                          'aadhaar_id': aadhaar,
+                          'address': address,
+                          'blood_type': bloodType,
+                          'gender': gender,
+                          'phone': phone,
                         };
 
                         try {

@@ -81,6 +81,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const Text(
+                  "Your Profile",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 15),
                 GestureDetector(
                   onTap: () async {
                     final updatedData = await Navigator.push(
@@ -99,16 +107,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     }
                   },
                   child: Container(
-                    width: 35,
-                    height: 35,
+                    width: 75,
+                    height: 75,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.yellow,
                     ),
-                    child: const Icon(Icons.edit),
+                    child: const Icon(
+                      Icons.edit,
+                      size: 30,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 50),
                 Column(
                   children: [
                     Row(
@@ -119,12 +130,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           userData['name'] ?? 'Name not available',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 25,
+                            fontSize: 22,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -133,12 +143,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           userData['age'] ?? 'Age not available',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 25,
+                            fontSize: 22,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -147,7 +156,85 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           userData['height'] ?? 'Height not available',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 25,
+                            fontSize: 22,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Weight"),
+                        Text(
+                          userData['weight'] ?? 'weight not available',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("aadhaar"),
+                        Text(
+                          userData['aadhaar_id'] ?? 'aadhaar not available',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("address"),
+                        Text(
+                          userData['address'] ?? 'address not available',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Blood type"),
+                        Text(
+                          userData['blood_type'] ?? 'Blood type not available',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Gender"),
+                        Text(
+                          userData['gender'] == '0' ? "Male" : "Female",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Phone"),
+                        Text(
+                          userData['phone'] ?? 'Phone not available',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
                           ),
                         ),
                       ],

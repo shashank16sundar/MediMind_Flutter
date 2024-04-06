@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 //import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medimind_app/screens/auth/login_screen.dart';
+import 'package:medimind_app/screens/doctor_or_patient/patient_home_screen.dart';
 import 'package:medimind_app/screens/home_screen.dart';
 import 'package:medimind_app/utils/snack_bar.dart';
 import 'package:medimind_app/widgets/auth/otp_dialog_box.dart';
@@ -87,49 +89,10 @@ class FirebaseAuthMethods {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) {
-            return const HomeScreen();
+            return const PatientHomePage();
           },
         ),
         (route) => false,
-      );
-    } on FirebaseAuthException catch (e) {
-      displaySnackBar(context, e.message!);
-    }
-  }
-
-  //PHONE SIGN IN
-  Future<void> phoneSignIn({
-    required BuildContext context,
-    required String phoneNumber,
-    required VoidCallback onSignInSuccess,
-  }) async {
-    try {
-      final TextEditingController codeController = TextEditingController();
-      await _auth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await _auth.signInWithCredential(credential);
-          onSignInSuccess();
-        },
-        verificationFailed: (e) {
-          displaySnackBar(context, e.message!);
-        },
-        codeSent: (verificationId, forceResendingToken) async {
-          showOTPDialog(
-            context: context,
-            codeController: codeController,
-            onPressed: () async {
-              PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                verificationId: verificationId,
-                smsCode: codeController.text.trim(),
-              );
-
-              await _auth.signInWithCredential(credential);
-              Navigator.of(context).pop();
-            },
-          );
-        },
-        codeAutoRetrievalTimeout: (verificationId) {},
       );
     } on FirebaseAuthException catch (e) {
       displaySnackBar(context, e.message!);
@@ -154,18 +117,17 @@ class FirebaseAuthMethods {
     }
   }
 
-  //CHECK FOR EXISTING PROFILE
-//   Future<bool> checkProfile() async {
-//     return FirebaseFirestore.instance
-//         .collection('users')
-//         .doc(user.uid)
-//         .get()
-//         .then((value) {
-//       if (value.exists) {
-//         return true;
-//       } else {
-//         return false;
-//       }
-//     });
-//   }
+  Future<bool> checkProfile() async {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((value) {
+      if (value.exists) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
 }

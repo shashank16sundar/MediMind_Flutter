@@ -114,9 +114,18 @@ Widget _getPage(int index) {
               const SizedBox(height: 20),
               const Column(
                 children: [
-                  PatientPastAppointmentsWidget(),
-                  PatientPastAppointmentsWidget(),
-                  PatientPastAppointmentsWidget(),
+                  PatientPastAppointmentsWidget(
+                    appointmentID: 1,
+                  ),
+                  PatientPastAppointmentsWidget(
+                    appointmentID: 2,
+                  ),
+                  PatientPastAppointmentsWidget(
+                    appointmentID: 3,
+                  ),
+                  PatientPastAppointmentsWidget(
+                    appointmentID: 4,
+                  ),
                 ],
               )
             ],

@@ -114,10 +114,18 @@ Widget _getPage(int index) {
               const SizedBox(height: 20),
               const Column(
                 children: [
-                  DoctorPastAppointments(),
-                  DoctorPastAppointments(),
-                  DoctorPastAppointments(),
-                  DoctorPastAppointments(),
+                  DoctorPastAppointments(
+                    appointmentID: 1,
+                  ),
+                  DoctorPastAppointments(
+                    appointmentID: 2,
+                  ),
+                  DoctorPastAppointments(
+                    appointmentID: 3,
+                  ),
+                  DoctorPastAppointments(
+                    appointmentID: 4,
+                  ),
                 ],
               )
             ],

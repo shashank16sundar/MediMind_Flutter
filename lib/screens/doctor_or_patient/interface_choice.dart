@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medimind_app/screens/doctor/doctor_home_screen.dart';
-import 'package:medimind_app/screens/doctor_or_patient/doctor_home_screen.dart';
 import 'package:medimind_app/screens/patient/patient_home_screen.dart';
 import 'package:medimind_app/widgets/interface_choice/interface_button.dart';
 

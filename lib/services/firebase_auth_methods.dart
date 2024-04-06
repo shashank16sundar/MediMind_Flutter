@@ -36,7 +36,7 @@ class FirebaseAuthMethods {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) {
-            return const HomeScreen();
+            return const InterfaceChoicePage();
           },
         ),
         (route) => false,
@@ -61,7 +61,7 @@ class FirebaseAuthMethods {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) {
-            return const HomeScreen();
+            return const InterfaceChoicePage();
           },
         ),
         (route) => false,

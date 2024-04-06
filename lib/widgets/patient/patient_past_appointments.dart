@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class PatientPastAppointmentsWidget extends StatefulWidget {
-  const PatientPastAppointmentsWidget({super.key});
+  final int appointmentID;
+  const PatientPastAppointmentsWidget({
+    super.key,
+    required this.appointmentID,
+  });
 
   @override
   State<PatientPastAppointmentsWidget> createState() =>

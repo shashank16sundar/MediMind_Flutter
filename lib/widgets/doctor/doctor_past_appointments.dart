@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PatientPastAppointmentsWidget extends StatefulWidget {
-  const PatientPastAppointmentsWidget({super.key});
+class DoctorPastAppointments extends StatefulWidget {
+  const DoctorPastAppointments({super.key});
 
   @override
-  State<PatientPastAppointmentsWidget> createState() =>
-      _PatientPastAppointmentsWidgetState();
+  State<DoctorPastAppointments> createState() => _DoctorPastAppointmentsState();
 }
 
-class _PatientPastAppointmentsWidgetState
-    extends State<PatientPastAppointmentsWidget> {
+class _DoctorPastAppointmentsState extends State<DoctorPastAppointments> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,15 +25,8 @@ class _PatientPastAppointmentsWidgetState
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 15,
-                  backgroundImage: AssetImage(
-                    'assets/logos/doctor_avatar.png',
-                  ),
-                ),
-                SizedBox(width: 20),
                 Text(
-                  "Dr. Doof",
+                  "Shashank",
                   style: TextStyle(fontSize: 20),
                 ),
               ],

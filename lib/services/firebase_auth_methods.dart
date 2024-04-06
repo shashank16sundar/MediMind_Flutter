@@ -6,7 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medimind_app/screens/auth/login_screen.dart';
-import 'package:medimind_app/screens/doctor_or_patient/patient_home_screen.dart';
+import 'package:medimind_app/screens/doctor_or_patient/interface_choice.dart';
+import 'package:medimind_app/screens/patient/patient_home_screen.dart';
 import 'package:medimind_app/screens/home_screen.dart';
 import 'package:medimind_app/utils/snack_bar.dart';
 import 'package:medimind_app/widgets/auth/otp_dialog_box.dart';
@@ -89,7 +90,7 @@ class FirebaseAuthMethods {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) {
-            return const PatientHomePage();
+            return const InterfaceChoicePage();
           },
         ),
         (route) => false,
@@ -120,6 +121,20 @@ class FirebaseAuthMethods {
   Future<bool> checkProfile() async {
     return FirebaseFirestore.instance
         .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((value) {
+      if (value.exists) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  Future<bool> checkDoctorProfile() async {
+    return FirebaseFirestore.instance
+        .collection('doctors')
         .doc(user.uid)
         .get()
         .then((value) {

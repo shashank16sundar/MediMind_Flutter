@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medimind_app/widgets/auth/auth_textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
-import 'package:medimind_app/widgets/auth_textfield.dart';
 
 class EmailPasswordLogin extends StatefulWidget {
   const EmailPasswordLogin({Key? key}) : super(key: key);

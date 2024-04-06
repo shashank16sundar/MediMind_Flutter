@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medimind_app/firebase_options.dart';
 import 'package:medimind_app/screens/auth/login_screen.dart';
+import 'package:medimind_app/screens/doctor_or_patient/interface_choice.dart';
 import 'package:medimind_app/screens/home_screen.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +32,12 @@ class MyApp extends StatelessWidget {
           initialData: null,
         ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: AuthWrapper(),
+        home: const AuthWrapper(),
+        theme: ThemeData(
+          textTheme: GoogleFonts.poppinsTextTheme(),
+        ),
       ),
     );
   }
@@ -46,8 +51,7 @@ class AuthWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User?>();
 
     if (firebaseUser != null) {
-      return const HomeScreen();
-      //return const ItineraryEntryPage();
+      return const InterfaceChoicePage();
     } else {
       return const LoginScreen();
     }

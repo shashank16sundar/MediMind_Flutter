@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:medimind_app/widgets/auth/auth_icon_button.dart';
 import 'package:provider/provider.dart';
 import 'package:medimind_app/screens/auth/login_email_screen.dart';
 import 'package:medimind_app/screens/auth/signup_email_screen.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
-import 'package:medimind_app/widgets/auth_icon_button.dart';
 import 'package:medimind_app/widgets/or_divider_widget.dart';
 import 'package:flutter/gestures.dart';
 
@@ -23,32 +23,17 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFFF8DC),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              "Welcome to",
-              style: TextStyle(fontSize: 17),
+            Image.asset(
+              'assets/logos/MediMind_transparent.png',
+              fit: BoxFit.cover,
             ),
-            const SizedBox(height: 10),
-            const Text(
-              "MediMind",
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 5),
-            const Text(
-              "Where Travel Finds Its Home",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 30),
             AuthIconButton(
               labelText: 'Sign in with Google',
               isSvg: true,
@@ -102,11 +87,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return const EmailPasswordSignup();
-                          },
-                        ));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const EmailPasswordSignup();
+                            },
+                          ),
+                        );
                       },
                   ),
                 ],

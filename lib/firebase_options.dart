@@ -66,6 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '762970879166',
     projectId: 'medimind-2b1b0',
     storageBucket: 'medimind-2b1b0.appspot.com',
+    androidClientId: '762970879166-01ots8jf0h481o8eo8c7orscdnva1o98.apps.googleusercontent.com',
+    iosClientId: '762970879166-eun2np3lbek8nh0rcap2n409ocre91a4.apps.googleusercontent.com',
     iosBundleId: 'com.example.medimindApp',
   );
 
@@ -75,6 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '762970879166',
     projectId: 'medimind-2b1b0',
     storageBucket: 'medimind-2b1b0.appspot.com',
+    androidClientId: '762970879166-01ots8jf0h481o8eo8c7orscdnva1o98.apps.googleusercontent.com',
+    iosClientId: '762970879166-6kg58jrme76oh80vsfgjeibg1lg7cuba.apps.googleusercontent.com',
     iosBundleId: 'com.example.medimindApp.RunnerTests',
   );
 }

@@ -23,11 +23,12 @@ class _InterfaceChoicePageState extends State<InterfaceChoicePage> {
             children: [
               const Text(
                 "Choose Your Identity",
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 25),
               ),
               const SizedBox(height: 40),
               InterfaceButton(
                 labelText: "Patient",
+                imageURL: "assets/logos/patient.png",
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
@@ -42,6 +43,7 @@ class _InterfaceChoicePageState extends State<InterfaceChoicePage> {
               const SizedBox(height: 20),
               InterfaceButton(
                 labelText: "Doctor",
+                imageURL: "assets/logos/doctor_avatar.png",
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(

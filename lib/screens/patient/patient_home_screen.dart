@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medimind_app/screens/patient/patient_upcoming_appointment_screen.dart';
 import 'package:medimind_app/screens/profile/profile_screen.dart';
+import 'package:medimind_app/services/firebase_auth_methods.dart';
 import 'package:medimind_app/widgets/patient/patient_past_appointments.dart';
 import 'package:medimind_app/widgets/patient/patient_upcoming_widget.dart';
+import 'package:provider/provider.dart';
 
 class PatientHomePage extends StatefulWidget {
   const PatientHomePage({super.key});
@@ -21,6 +25,8 @@ class _PatientHomePageState extends State<PatientHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<FirebaseAuthMethods>().user;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
@@ -32,13 +38,13 @@ class _PatientHomePageState extends State<PatientHomePage> {
           width: 100,
           height: 100,
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
+            padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
             child: Text(
-              "MediMind",
-              style: TextStyle(
-                fontSize: 25,
+              "Hello, ${user.displayName}",
+              style: const TextStyle(
+                fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
@@ -47,7 +53,7 @@ class _PatientHomePageState extends State<PatientHomePage> {
         ],
         centerTitle: true,
       ),
-      body: _getPage(_selectedIndex),
+      body: _getPage(_selectedIndex, user, context),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xffFFE2E2),
         items: const [
@@ -67,7 +73,7 @@ class _PatientHomePageState extends State<PatientHomePage> {
   }
 }
 
-Widget _getPage(int index) {
+Widget _getPage(int index, User user, BuildContext context) {
   switch (index) {
     case 0:
       return SingleChildScrollView(
@@ -77,20 +83,39 @@ Widget _getPage(int index) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 30),
-              const Text(
-                "Hey Shashank,",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                "Upcoming Appointments",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Upcoming Appointments",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: FloatingActionButton(
+                      elevation: 0,
+                      backgroundColor: const Color(0xffFFE2E2),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const PatientUpcomingAppointmentScreen();
+                            },
+                          ),
+                        );
+                      },
+                      child: const Icon(
+                        Icons.add,
+                        size: 35,
+                        color: Color(0xff264653),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               SizedBox(

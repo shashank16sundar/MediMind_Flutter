@@ -24,7 +24,7 @@ class _AuthIconButtonState extends State<AuthIconButton> {
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
-      width: size.width * 0.8,
+      width: size.width,
       height: 60,
       child: ElevatedButton.icon(
         style: ButtonStyle(

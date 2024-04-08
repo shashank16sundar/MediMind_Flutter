@@ -7,11 +7,11 @@ import 'package:medimind_app/widgets/auth/auth_icon_button.dart';
 import 'package:medimind_app/widgets/auth/auth_textfield.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  final Map<String, dynamic> userData;
+  final Map<String, dynamic> patientData;
 
   const EditProfileScreen({
     super.key,
-    required this.userData,
+    required this.patientData,
   });
 
   @override
@@ -19,22 +19,22 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  Map<String, dynamic> userData = {};
+  Map<String, dynamic> patientData = {};
 
   @override
   void initState() {
     super.initState();
-    userData = widget.userData;
+    patientData = widget.patientData;
   }
 
   Future<bool> getUserProfileDataFromFirebase(User user) async {
     final ans = await FirebaseFirestore.instance
-        .collection('users')
+        .collection('patients')
         .doc(user.uid)
         .get()
         .then((value) {
       if (value.exists) {
-        userData = value.data()!;
+        patientData = value.data()!;
         return true;
       } else {
         return false;
@@ -72,15 +72,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           return const Center(child: Text("Error"));
         }
 
-        nameController.text = userData['name'] ?? '';
-        ageController.text = userData['age'] ?? '';
-        heightController.text = userData['height'] ?? '';
-        weightController.text = userData['weight'] ?? '';
-        addressController.text = userData['address'] ?? '';
-        aadhaarController.text = userData['aadhaar_id'] ?? '';
-        genderController.text = userData['gender'] ?? '';
-        bloodController.text = userData['blood_type'] ?? '';
-        phoneController.text = userData['phone'] ?? '';
+        nameController.text = patientData['name'] ?? '';
+        ageController.text = patientData['age'] ?? '';
+        heightController.text = patientData['height'] ?? '';
+        weightController.text = patientData['weight'] ?? '';
+        addressController.text = patientData['address'] ?? '';
+        aadhaarController.text = patientData['aadhaar_id'] ?? '';
+        genderController.text = patientData['gender'] ?? '';
+        bloodController.text = patientData['blood_group'] ?? '';
+        phoneController.text = patientData['phone_number'] ?? '';
 
         return Scaffold(
           body: Center(
@@ -160,29 +160,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         final gender = genderController.text;
                         final phone = phoneController.text;
 
-                        final userData = {
+                        final patientData = {
                           'name': name,
                           'age': age,
                           'height': height,
                           'weight': weight,
                           'aadhaar_id': aadhaar,
                           'address': address,
-                          'blood_type': bloodType,
+                          'blood_group': bloodType,
                           'gender': gender,
-                          'phone': phone,
+                          'phone_number': phone,
                         };
 
                         try {
                           await FirebaseFirestore.instance
-                              .collection('users')
+                              .collection('patients')
                               .doc(userID)
-                              .set(userData);
+                              .set(patientData);
 
                           // ignore: use_build_context_synchronously
-                          Navigator.pop(context, userData);
+                          Navigator.pop(context, patientData);
                         } catch (e) {}
                       },
-                    )
+                    ),
                   ],
                 ),
               ),

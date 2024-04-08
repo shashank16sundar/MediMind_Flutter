@@ -25,81 +25,84 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFF8DC),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/logos/MediMind_transparent.png',
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(height: 30),
-            AuthIconButton(
-              labelText: 'Sign in with Google',
-              isSvg: true,
-              icon: SvgPicture.asset(
-                'assets/svgs/google_svg.svg',
-                height: 40,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/logos/MediMind_transparent.png',
+                fit: BoxFit.cover,
               ),
-              onPress: onGoogleSignIn,
-            ),
-            const SizedBox(height: 15),
-            AuthIconButton(
-              labelText: 'Sign in with Phone',
-              isSvg: false,
-              icon: Icons.phone,
-              onPress: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) {
-                    return const EmailPasswordLogin();
-                  },
-                ));
-              },
-            ),
-            const OrDivider(),
-            AuthIconButton(
-              labelText: 'Sign in with Email',
-              isSvg: false,
-              icon: Icons.email,
-              onPress: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) {
-                    return const EmailPasswordLogin();
-                  },
-                ));
-              },
-            ),
-            const SizedBox(height: 10),
-            RichText(
-              text: TextSpan(
-                text: "Don't have an account? ",
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black,
+              const SizedBox(height: 30),
+              AuthIconButton(
+                labelText: 'Sign in with Google',
+                isSvg: true,
+                icon: SvgPicture.asset(
+                  'assets/svgs/google_svg.svg',
+                  height: 40,
                 ),
-                children: [
-                  TextSpan(
-                    text: "Sign up now",
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 33, 10, 164),
-                      fontWeight: FontWeight.bold,
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const EmailPasswordSignup();
-                            },
-                          ),
-                        );
-                      },
-                  ),
-                ],
+                onPress: onGoogleSignIn,
               ),
-            ),
-          ],
+              const SizedBox(height: 15),
+              AuthIconButton(
+                labelText: 'Sign in with Phone',
+                isSvg: false,
+                icon: Icons.phone,
+                onPress: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return const EmailPasswordLogin();
+                    },
+                  ));
+                },
+              ),
+              const OrDivider(),
+              AuthIconButton(
+                labelText: 'Sign in with Email',
+                isSvg: false,
+                icon: Icons.email,
+                onPress: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return const EmailPasswordLogin();
+                    },
+                  ));
+                },
+              ),
+              const SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  text: "Don't have an account? ",
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "Sign up now",
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 33, 10, 164),
+                        fontWeight: FontWeight.bold,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const EmailPasswordSignup();
+                              },
+                            ),
+                          );
+                        },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

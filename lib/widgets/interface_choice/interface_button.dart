@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class InterfaceButton extends StatefulWidget {
   final String labelText;
   final VoidCallback onTap;
+  final String imageURL;
 
   const InterfaceButton({
     super.key,
     required this.labelText,
     required this.onTap,
+    required this.imageURL,
   });
 
   @override
@@ -21,7 +23,7 @@ class _InterfaceButtonState extends State<InterfaceButton> {
 
     return SizedBox(
       width: size.width * 0.8,
-      height: 60,
+      height: 250,
       child: ElevatedButton(
         style: ButtonStyle(
           shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
@@ -37,11 +39,25 @@ class _InterfaceButtonState extends State<InterfaceButton> {
           ),
         ),
         onPressed: widget.onTap,
-        child: Text(
-          widget.labelText,
-          style: const TextStyle(
-            fontSize: 25,
-            color: Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                widget.labelText,
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.black,
+                ),
+              ),
+              Image.asset(
+                widget.imageURL,
+                fit: BoxFit.contain,
+                width: 150,
+                height: 150,
+              ),
+            ],
           ),
         ),
       ),

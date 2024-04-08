@@ -73,7 +73,7 @@ class _EditDoctorProfileScreenState extends State<EditDoctorProfileScreen> {
         nameController.text = doctorData['name'] ?? '';
         specialityController.text = doctorData['speciality'] ?? '';
         experienceController.text = doctorData['experience'] ?? '';
-        emailController.text = doctorData['email'] ?? '';
+        emailController.text = doctorData['email_id'] ?? '';
         degreesController.text = doctorData['degrees'] ?? '';
         hospitalController.text = doctorData['doctor_hospital'] ?? '';
 

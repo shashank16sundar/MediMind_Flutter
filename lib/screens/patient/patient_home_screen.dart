@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medimind_app/models/patients/patient_upcoming_appointment_model.dart';
-import 'package:medimind_app/screens/patient/patient_upcoming_appointment_screen.dart';
+import 'package:medimind_app/screens/patient/patient_add_appointment_screen.dart';
 import 'package:medimind_app/screens/profile/profile_screen.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
 import 'package:medimind_app/widgets/patient/patient_past_appointments.dart';
@@ -114,7 +114,7 @@ Widget _getPage(
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return PatientUpcomingAppointmentScreen(
+                              return PatientAddAppointmentScreen(
                                 refreshData: refreshData,
                               );
                             },
@@ -153,12 +153,13 @@ Widget _getPage(
                         width: 400,
                         height: 100,
                         child: const Center(
-                            child: Text(
-                          "No upcoming appointments! Yay!",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
+                          child: Text(
+                            "No upcoming appointments! Yay!",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        )),
+                        ),
                       );
                     } else {
                       return SizedBox(

@@ -81,8 +81,22 @@ class _PatientPastScreenState extends State<PatientPastScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
         backgroundColor: const Color(0xffFFE2E2),
-        title: Text('Past Scans for Appointment ${widget.appointmentID}'),
+        title: const Text(
+          'Get Your Report',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),

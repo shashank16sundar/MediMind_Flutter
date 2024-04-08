@@ -58,18 +58,10 @@ class _CancelAppointmentState extends State<CancelAppointment> {
             Navigator.pop(context);
           },
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: Text(
-              "MediMind",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 25,
-              ),
-            ),
-          ),
-        ],
+        title: const Text(
+          "View Appointment",
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

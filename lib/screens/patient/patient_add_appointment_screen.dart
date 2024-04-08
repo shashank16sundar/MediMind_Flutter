@@ -8,21 +8,21 @@ import 'package:medimind_app/widgets/auth/auth_icon_button.dart';
 import 'package:medimind_app/widgets/patient/p_upcoming_appt_formfield.dart';
 import 'package:provider/provider.dart';
 
-class PatientUpcomingAppointmentScreen extends StatefulWidget {
+class PatientAddAppointmentScreen extends StatefulWidget {
   final VoidCallback refreshData;
 
-  const PatientUpcomingAppointmentScreen({
+  const PatientAddAppointmentScreen({
     super.key,
     required this.refreshData,
   });
 
   @override
-  State<PatientUpcomingAppointmentScreen> createState() =>
-      _PatientUpcomingAppointmentScreenState();
+  State<PatientAddAppointmentScreen> createState() =>
+      _PatientAddAppointmentScreenState();
 }
 
-class _PatientUpcomingAppointmentScreenState
-    extends State<PatientUpcomingAppointmentScreen> {
+class _PatientAddAppointmentScreenState
+    extends State<PatientAddAppointmentScreen> {
   final TextEditingController doctorController = TextEditingController();
   final TextEditingController hospitalController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
@@ -68,18 +68,22 @@ class _PatientUpcomingAppointmentScreenState
                 PatientUpcomingApptFormWidget(
                   labelText: "Choose a doctor",
                   controller: doctorController,
+                  fieldType: 0,
                 ),
                 PatientUpcomingApptFormWidget(
                   labelText: "Choose a hospital",
                   controller: hospitalController,
+                  fieldType: 0,
                 ),
                 PatientUpcomingApptFormWidget(
                   labelText: "Choose a date",
                   controller: dateController,
+                  fieldType: 1,
                 ),
                 PatientUpcomingApptFormWidget(
                   labelText: "Choose a time",
                   controller: timeController,
+                  fieldType: 2,
                 ),
                 AuthIconButton(
                   labelText: "Book Appointment",

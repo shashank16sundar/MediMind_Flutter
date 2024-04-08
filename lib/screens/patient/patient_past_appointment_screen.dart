@@ -60,7 +60,7 @@ class _PatientPastScreenState extends State<PatientPastScreen> {
   Future<void> getImageFromFlask() async {
     final response = await http.get(
       Uri.parse(
-        'https://763f-1-6-74-117.ngrok-free.app/api/sendFiles/1',
+        'https://763f-1-6-74-117.ngrok-free.app/api/sendFiles/2',
       ),
     );
 
@@ -79,6 +79,7 @@ class _PatientPastScreenState extends State<PatientPastScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xffFFE2E2),
         title: Text('Past Scans for Appointment ${widget.appointmentID}'),
       ),
       body: SingleChildScrollView(

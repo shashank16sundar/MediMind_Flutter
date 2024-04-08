@@ -28,11 +28,11 @@ class _DoctorUpcomingWidgetsState extends State<DoctorUpcomingWidgets> {
         margin: const EdgeInsets.only(right: 20),
         width: 300,
         decoration: BoxDecoration(
-          color: const Color(0xff31363F),
+          color: const Color(0xffAEDEFC),
           borderRadius: BorderRadius.circular(20),
         ),
         child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
             children: [
               Row(
@@ -49,7 +49,7 @@ class _DoctorUpcomingWidgetsState extends State<DoctorUpcomingWidgets> {
                     children: [
                       Text(
                         'Shashank',
-                        style: TextStyle(color: Colors.white, fontSize: 22),
+                        style: TextStyle(color: Colors.black, fontSize: 22),
                       ),
                     ],
                   ),
@@ -63,13 +63,13 @@ class _DoctorUpcomingWidgetsState extends State<DoctorUpcomingWidgets> {
                     children: [
                       Icon(
                         Icons.pin_drop_rounded,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       SizedBox(width: 20),
                       Text(
                         'Fortis Hospital',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 15,
                         ),
                       ),
@@ -80,13 +80,13 @@ class _DoctorUpcomingWidgetsState extends State<DoctorUpcomingWidgets> {
                     children: [
                       Icon(
                         Icons.calendar_month_sharp,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       SizedBox(width: 20),
                       Text(
                         'Today',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 15,
                         ),
                       ),
@@ -97,13 +97,13 @@ class _DoctorUpcomingWidgetsState extends State<DoctorUpcomingWidgets> {
                     children: [
                       Icon(
                         Icons.more_time,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       SizedBox(width: 20),
                       Text(
                         '14:00',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 15,
                         ),
                       ),

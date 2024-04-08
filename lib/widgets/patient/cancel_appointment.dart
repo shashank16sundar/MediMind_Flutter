@@ -22,9 +22,12 @@ class CancelAppointment extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xffFFE2E2),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -35,6 +38,7 @@ class CancelAppointment extends StatelessWidget {
             child: Text(
               "MediMind",
               style: TextStyle(
+                color: Colors.black,
                 fontSize: 25,
               ),
             ),
@@ -117,8 +121,9 @@ class CancelAppointment extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black, // Set button color to black
-                    onPrimary: Colors.white, // Set text color to white
+                    primary:
+                        const Color(0xffFFE2E2), // Set button color to black
+                    onPrimary: Colors.black, // Set text color to white
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(8), // Adjust button shape

@@ -120,7 +120,22 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Upload Medical Documents'),
+        automaticallyImplyLeading: false, // Disable the default back arrow
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black, // Change the color of the arrow
+          ),
+          onPressed: () {
+            // Define the action when the arrow is pressed
+            Navigator.of(context).pop();
+          },
+        ),
+        backgroundColor: const Color(0xffFFE2E2),
+        title: const Text(
+          'Upload Medical Documents',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -129,16 +144,28 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xffAEDEFC),
+                  onPrimary: Colors.black,
+                ),
                 onPressed: _pickReport,
                 child: const Text('Upload Report (PDF)'),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xffAEDEFC),
+                  onPrimary: Colors.black,
+                ),
                 onPressed: _pickPrescriptionImage,
                 child: const Text('Upload Prescription Image'),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xffAEDEFC),
+                  onPrimary: Colors.black,
+                ),
                 onPressed: _pickXRayScanImage,
                 child: const Text('Upload X-Ray Scan Image'),
               ),
@@ -159,10 +186,18 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
                     );
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xffAEDEFC),
+                  onPrimary: Colors.black,
+                ),
                 child: const Text("Send Report to Flask"),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xffAEDEFC),
+                  onPrimary: Colors.black,
+                ),
                 onPressed: () {
                   if (prescriptionImage != null) {
                     APIService.sendPrescriptionImageToFlask(
@@ -179,6 +214,10 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xffAEDEFC),
+                  onPrimary: Colors.black,
+                ),
                 onPressed: () {
                   if (xRayScanImage != null) {
                     APIService.sendXRayScanImageToFlask(
@@ -192,7 +231,12 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
                 },
                 child: const Text("Send X-Ray Scan Image to Flask"),
               ),
+              const SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xffAEDEFC),
+                  onPrimary: Colors.black,
+                ),
                 onPressed: () {
                   // APIService.sendSummarizeRequestToFlask(widget.appointmentID);
                   _sendSummarizeRequest(user);
@@ -201,6 +245,7 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
               ),
               const SizedBox(height: 20),
               Text(summary),
+              const SizedBox(height: 30),
               TextField(
                 onChanged: (value) {
                   setState(() {
@@ -211,18 +256,16 @@ class _PastAppointmentHomeScreenState extends State<PastAppointmentHomeScreen> {
                   labelText: 'Add Note',
                   border: OutlineInputBorder(),
                 ),
-                maxLines: null, // Allow multiple lines
-                // Hide text field when note is submitted
+                maxLines: null,
                 enabled: !isNoteSubmitted,
               ),
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
-                  submitDoctorNote(); // Call function to submit note
+                  submitDoctorNote();
                 },
                 child: const Text('Add Note'),
               ),
-              // Display the submitted doctor note only when the button is clicked
               Visibility(
                 visible: isNoteSubmitted,
                 child: Column(

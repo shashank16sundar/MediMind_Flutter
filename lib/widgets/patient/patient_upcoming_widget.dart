@@ -7,24 +7,26 @@ class PatientUpcomingAppointmentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => const CancelAppointment(
-      doctorName: 'Dr. DoLittle', // Provide the doctor's name here
-      hospitalName: 'Fortis Hospital', // Provide the hospital's name here
-      appointmentDate: '2024-04-07', // Provide the appointment date here
-      appointmentTime: '14:00', // Provide the appointment time here
-    ),
-  ),
-);
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CancelAppointment(
+              doctorName: 'Dr. DoLittle', // Provide the doctor's name here
+              hospitalName:
+                  'Fortis Hospital', // Provide the hospital's name here
+              appointmentDate:
+                  '2024-04-07', // Provide the appointment date here
+              appointmentTime: '14:00', // Provide the appointment time here
+            ),
+          ),
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(right: 20),
         width: 300,
         decoration: BoxDecoration(
-          color: const Color(0xff31363F),
+          color: const Color(0xffAEDEFC),
           borderRadius: BorderRadius.circular(20),
         ),
         child: const Padding(
@@ -45,12 +47,11 @@ class PatientUpcomingAppointmentWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Dr. DoLittle',
-                        style: TextStyle(color: Colors.white, fontSize: 22),
+                        style: TextStyle(color: Colors.black, fontSize: 22),
                       ),
                       Text(
                         'Psychiatrist',
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 207, 206, 206)),
+                        style: TextStyle(color: Colors.black),
                       ),
                     ],
                   ),
@@ -64,13 +65,13 @@ class PatientUpcomingAppointmentWidget extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.pin_drop_rounded,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       SizedBox(width: 20),
                       Text(
                         'Fortis Hospital',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 15,
                         ),
                       ),
@@ -81,13 +82,13 @@ class PatientUpcomingAppointmentWidget extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.calendar_month_sharp,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       SizedBox(width: 20),
                       Text(
                         'Today',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 15,
                         ),
                       ),
@@ -98,13 +99,13 @@ class PatientUpcomingAppointmentWidget extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.more_time,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       SizedBox(width: 20),
                       Text(
                         '14:00',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 15,
                         ),
                       ),

@@ -21,9 +21,12 @@ class _DoctorCancelAppointmentState extends State<DoctorCancelAppointment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xffFFE2E2),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -34,6 +37,7 @@ class _DoctorCancelAppointmentState extends State<DoctorCancelAppointment> {
             child: Text(
               "MediMind",
               style: TextStyle(
+                color: Colors.black,
                 fontSize: 25,
               ),
             ),
@@ -97,8 +101,8 @@ class _DoctorCancelAppointmentState extends State<DoctorCancelAppointment> {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                    onPrimary: Colors.white,
+                    primary: const Color(0xffFFE2E2),
+                    onPrimary: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -107,7 +111,7 @@ class _DoctorCancelAppointmentState extends State<DoctorCancelAppointment> {
                     padding: EdgeInsets.all(12.0),
                     child: Text(
                       'Cancel Appointment',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   ),
                 ),

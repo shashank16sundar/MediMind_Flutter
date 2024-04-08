@@ -1,22 +1,48 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
-class CancelAppointment extends StatelessWidget {
-  final String doctorName;
-  final String hospitalName;
-  final String appointmentDate;
-  final String appointmentTime;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:medimind_app/models/patients/patient_upcoming_appointment_model.dart';
+import 'package:medimind_app/services/firebase_auth_methods.dart';
+
+class CancelAppointment extends StatefulWidget {
+  final PatientAppointment patientAppointment;
+  final String appointmentID;
+  final VoidCallback refreshData;
 
   const CancelAppointment({
     Key? key,
-    required this.doctorName,
-    required this.hospitalName,
-    required this.appointmentDate,
-    required this.appointmentTime,
+    required this.patientAppointment,
+    required this.appointmentID,
+    required this.refreshData,
   }) : super(key: key);
 
   @override
+  State<CancelAppointment> createState() => _CancelAppointmentState();
+}
+
+class _CancelAppointmentState extends State<CancelAppointment> {
+  Future<void> deleteAppointment(BuildContext context, User user) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("patient_upcoming_appointments")
+          .doc(user.uid)
+          .collection("appointment")
+          .doc(widget.appointmentID)
+          .delete();
+      widget.refreshData();
+      Navigator.pop(context);
+    } catch (error) {
+      print("Error deleting appointment: $error");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // Placeholder for doctor's summary
+    final user = context.read<FirebaseAuthMethods>().user;
     String doctorSummary =
         "A psychiatrist is a medical doctor specializing in mental health, diagnosing, and treating mental illnesses.";
 
@@ -65,7 +91,7 @@ class CancelAppointment extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              '$doctorName',
+              widget.patientAppointment.doctorName,
               style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold), // Adjust text color
@@ -79,7 +105,7 @@ class CancelAppointment extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Hospital: $hospitalName',
+              'Hospital: ${widget.patientAppointment.hospitalName}',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -87,7 +113,7 @@ class CancelAppointment extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Date: $appointmentDate',
+              'Date: ${widget.patientAppointment.date}',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -95,7 +121,7 @@ class CancelAppointment extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Time: $appointmentTime',
+              'Time: ${widget.patientAppointment.time}',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -107,7 +133,7 @@ class CancelAppointment extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-              ), // Adjust text color
+              ),
             ),
             const Spacer(),
             SizedBox(
@@ -116,24 +142,20 @@ class CancelAppointment extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Implement cancel appointment functionality here
-                    // For now, let's just navigate back
-                    Navigator.pop(context);
+                    deleteAppointment(context, user);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:
-                        const Color(0xffFFE2E2), // Set button color to black
-                    onPrimary: Colors.black, // Set text color to white
+                    foregroundColor: Colors.black,
+                    backgroundColor: const Color(0xffFFE2E2),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(8), // Adjust button shape
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Text(
                       'Cancel Appointment',
-                      style: TextStyle(fontSize: 16), // Adjust button text size
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),

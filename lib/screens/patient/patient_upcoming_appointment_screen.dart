@@ -1,7 +1,6 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medimind_app/models/patients/patient_upcoming_appointment_model.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
@@ -10,7 +9,12 @@ import 'package:medimind_app/widgets/patient/p_upcoming_appt_formfield.dart';
 import 'package:provider/provider.dart';
 
 class PatientUpcomingAppointmentScreen extends StatefulWidget {
-  const PatientUpcomingAppointmentScreen({super.key});
+  final VoidCallback refreshData;
+
+  const PatientUpcomingAppointmentScreen({
+    super.key,
+    required this.refreshData,
+  });
 
   @override
   State<PatientUpcomingAppointmentScreen> createState() =>
@@ -100,7 +104,7 @@ class _PatientUpcomingAppointmentScreenState
                         'date': patientAppointment.date,
                         'time': patientAppointment.time,
                       });
-
+                      widget.refreshData();
                       Navigator.of(context).pop();
                     } catch (e) {
                       print('Error uploading appointment: $e');

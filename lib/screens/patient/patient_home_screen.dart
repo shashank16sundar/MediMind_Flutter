@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medimind_app/models/patients/patient_upcoming_appointment_model.dart';
 import 'package:medimind_app/screens/patient/patient_upcoming_appointment_screen.dart';
 import 'package:medimind_app/screens/profile/profile_screen.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
@@ -23,6 +25,10 @@ class _PatientHomePageState extends State<PatientHomePage> {
     });
   }
 
+  void refreshData() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.read<FirebaseAuthMethods>().user;
@@ -42,7 +48,7 @@ class _PatientHomePageState extends State<PatientHomePage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
             child: Text(
-              "Hello, ${user.displayName}",
+              "Hello, ${user.displayName ?? "user"}",
               style: const TextStyle(
                 fontSize: 18,
                 color: Colors.black,
@@ -53,7 +59,7 @@ class _PatientHomePageState extends State<PatientHomePage> {
         ],
         centerTitle: true,
       ),
-      body: _getPage(_selectedIndex, user, context),
+      body: _getPage(_selectedIndex, user, context, refreshData),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xffFFE2E2),
         items: const [
@@ -73,7 +79,12 @@ class _PatientHomePageState extends State<PatientHomePage> {
   }
 }
 
-Widget _getPage(int index, User user, BuildContext context) {
+Widget _getPage(
+  int index,
+  User user,
+  BuildContext context,
+  VoidCallback refreshData,
+) {
   switch (index) {
     case 0:
       return SingleChildScrollView(
@@ -103,7 +114,9 @@ Widget _getPage(int index, User user, BuildContext context) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return const PatientUpcomingAppointmentScreen();
+                              return PatientUpcomingAppointmentScreen(
+                                refreshData: refreshData,
+                              );
                             },
                           ),
                         );
@@ -118,15 +131,71 @@ Widget _getPage(int index, User user, BuildContext context) {
                 ],
               ),
               const SizedBox(height: 20),
-              SizedBox(
-                width: 400,
-                height: 210,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      const PatientUpcomingAppointmentWidget(),
-                  itemCount: 4,
-                ),
+              FutureBuilder<QuerySnapshot>(
+                future: FirebaseFirestore.instance
+                    .collection("patient_upcoming_appointments")
+                    .doc(user.uid)
+                    .collection("appointment")
+                    .get(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text("Error - ${snapshot.error}");
+                  } else {
+                    final appointments = snapshot.data!.docs;
+                    if (appointments.isEmpty) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xffFFE2E2),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        width: 400,
+                        height: 100,
+                        child: const Center(
+                            child: Text(
+                          "No upcoming appointments! Yay!",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                      );
+                    } else {
+                      return SizedBox(
+                        width: 400,
+                        height: 210,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            final appointmentData = appointments[index].data()
+                                as Map<String, dynamic>;
+                            final doctorName =
+                                appointmentData['doctorName'] ?? '';
+                            final hospitalName =
+                                appointmentData['hospitalName'] ?? '';
+                            final date = appointmentData['date'] ?? '';
+                            final time = appointmentData['time'] ?? '';
+                            final appointmentID = appointments[index].id;
+
+                            PatientAppointment patientAppointment =
+                                PatientAppointment(
+                              doctorName: doctorName,
+                              hospitalName: hospitalName,
+                              date: date,
+                              time: time,
+                            );
+                            return PatientUpcomingAppointmentWidget(
+                              patientAppointment: patientAppointment,
+                              appointmentID: appointmentID,
+                              refreshData: refreshData,
+                            );
+                          },
+                          itemCount: appointments.length,
+                        ),
+                      );
+                    }
+                  }
+                },
               ),
               const SizedBox(height: 20),
               const Text(

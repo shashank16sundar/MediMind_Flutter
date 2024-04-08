@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:medimind_app/firebase_options.dart';
 import 'package:medimind_app/screens/auth/login_screen.dart';
 import 'package:medimind_app/screens/doctor_or_patient/interface_choice.dart';
-import 'package:medimind_app/screens/home_screen.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
 

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:medimind_app/screens/auth/login_email_screen.dart';
 import 'package:medimind_app/screens/auth/signup_email_screen.dart';
 import 'package:medimind_app/services/firebase_auth_methods.dart';
-import 'package:medimind_app/widgets/or_divider_widget.dart';
+import 'package:medimind_app/widgets/misc/or_divider_widget.dart';
 import 'package:flutter/gestures.dart';
 
 class LoginScreen extends StatefulWidget {

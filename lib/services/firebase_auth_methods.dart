@@ -117,7 +117,7 @@ class FirebaseAuthMethods {
 
   Future<bool> checkProfile() async {
     return FirebaseFirestore.instance
-        .collection('users')
+        .collection('patients')
         .doc(user.uid)
         .get()
         .then((value) {
